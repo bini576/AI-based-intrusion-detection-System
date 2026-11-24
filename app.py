@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -15,34 +16,28 @@ from sklearn.metrics import (
 import warnings
 warnings.filterwarnings("ignore")
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # PAGE CONFIG
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 st.set_page_config(
     page_title="AI-Based IDS | Biniyam Ademasu",
-    page_icon="ðŸ›¡ï¸",
+    page_icon="shield",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-# CUSTOM CSS â€” CYBER DARK THEME
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# CUSTOM CSS
 st.markdown("""
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap');
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
-  /* Base */
   html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
   .stApp { background: #070a12; color: #e2e8f0; }
 
-  /* Sidebar */
   section[data-testid="stSidebar"] {
     background: #0d1117;
     border-right: 1px solid #1e2a3a;
   }
 
-  /* Cards */
   .metric-card {
     background: linear-gradient(135deg, #0d1117, #0f1923);
     border: 1px solid #1e3a5f;
@@ -56,7 +51,6 @@ st.markdown("""
   .metric-value { font-size: 2.2rem; font-weight: 700; color: #00d4ff; font-family: 'Fira Code'; }
   .metric-label { font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
-  /* Header banner */
   .header-banner {
     background: linear-gradient(135deg, #0d1117 0%, #0a1628 50%, #07101e 100%);
     border: 1px solid #1e3a5f;
@@ -86,7 +80,6 @@ st.markdown("""
     margin-top: 10px;
   }
 
-  /* Alert boxes */
   .alert-normal {
     background: rgba(0,255,136,0.08);
     border: 1px solid rgba(0,255,136,0.4);
@@ -101,11 +94,6 @@ st.markdown("""
   .alert-normal .alert-title { color: #00ff88; }
   .alert-attack .alert-title { color: #ff3b3b; }
 
-  /* Prediction result */
-  .result-normal { color: #00ff88; font-size: 2.5rem; font-weight: 800; font-family: 'Fira Code'; }
-  .result-attack { color: #ff3b3b; font-size: 2.5rem; font-weight: 800; font-family: 'Fira Code'; }
-
-  /* Section headers */
   .section-title {
     color: #00d4ff;
     font-size: 1.1rem;
@@ -117,7 +105,6 @@ st.markdown("""
     margin: 24px 0 16px;
   }
 
-  /* Stmetric override */
   [data-testid="metric-container"] {
     background: #0d1117;
     border: 1px solid #1e3a5f;
@@ -127,7 +114,6 @@ st.markdown("""
   [data-testid="metric-container"] label { color: #64748b !important; }
   [data-testid="metric-container"] [data-testid="stMetricValue"] { color: #00d4ff !important; font-family: 'Fira Code'; }
 
-  /* Buttons */
   .stButton > button {
     background: linear-gradient(135deg, #00d4ff, #0066ff);
     color: #000;
@@ -140,17 +126,14 @@ st.markdown("""
   }
   .stButton > button:hover { opacity: 0.85; transform: translateY(-1px); }
 
-  /* Tabs */
   .stTabs [data-baseweb="tab-list"] { background: #0d1117; border-bottom: 1px solid #1e3a5f; }
   .stTabs [data-baseweb="tab"] { color: #64748b; }
   .stTabs [aria-selected="true"] { color: #00d4ff !important; border-bottom: 2px solid #00d4ff; }
 
-  /* Tables */
   .dataframe { background: #0d1117 !important; color: #e2e8f0 !important; }
   .dataframe th { background: #0f1923 !important; color: #00d4ff !important; }
   .dataframe tr:hover td { background: #1e2a3a !important; }
 
-  /* File uploader */
   [data-testid="stFileUploadDropzone"] {
     background: #0d1117 !important;
     border: 2px dashed #1e3a5f !important;
@@ -160,9 +143,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-# FEATURES DEFINITION (from dataset structure)
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# FEATURES
 FEATURES = [
     "duration", "protocol_type", "service", "flag",
     "src_bytes", "dst_bytes", "land", "wrong_fragment", "urgent",
@@ -183,20 +164,9 @@ PROTOCOL_TYPES = ["tcp", "udp", "icmp"]
 SERVICES = ["http", "ftp", "smtp", "ssh", "dns", "ftp_data", "other"]
 FLAGS = ["SF", "S0", "REJ", "RSTO", "RSTR", "SH", "OTH", "S1", "S2", "S3"]
 
-ATTACK_CATEGORIES = {
-    "DoS": ["back", "land", "neptune", "pod", "smurf", "teardrop"],
-    "Probe": ["ipsweep", "nmap", "portsweep", "satan"],
-    "R2L": ["ftp_write", "guess_passwd", "imap", "multihop", "phf", "spy", "warezclient", "warezmaster"],
-    "U2R": ["buffer_overflow", "loadmodule", "perl", "rootkit"],
-    "Normal": ["normal"]
-}
-
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-# DATA & MODEL LOADING
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# DATA & MODEL
 @st.cache_data
 def generate_demo_data(n=5000, seed=42):
-    """Generate realistic synthetic IDS data for demo purposes."""
     rng = np.random.default_rng(seed)
     normal = int(n * 0.6)
     attack = n - normal
@@ -258,18 +228,15 @@ def train_models(df):
     X = df.drop("label", axis=1)
     y = df["label"]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
-
     scaler = StandardScaler()
     X_train_sc = scaler.fit_transform(X_train)
     X_test_sc  = scaler.transform(X_test)
-
     models = {
         "Random Forest": RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1),
         "Gradient Boosting": GradientBoostingClassifier(n_estimators=80, random_state=42),
         "Decision Tree": DecisionTreeClassifier(max_depth=10, random_state=42),
         "K-Nearest Neighbors": KNeighborsClassifier(n_neighbors=5, n_jobs=-1),
     }
-
     results = {}
     trained = {}
     for name, model in models.items():
@@ -283,23 +250,20 @@ def train_models(df):
             "cm":        confusion_matrix(y_test, y_pred).tolist(),
         }
         trained[name] = model
-
     return trained, scaler, X_test, y_test, results
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # SIDEBAR
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 with st.sidebar:
     st.markdown("""
     <div style='text-align:center; padding: 10px 0 20px;'>
-      <div style='font-size:3rem;'>ðŸ›¡ï¸</div>
+      <div style='font-size:3rem;'>&#x1F6E1;&#xFE0F;</div>
       <div style='color:#00d4ff; font-weight:700; font-size:1.1rem;'>AI-Based IDS</div>
-      <div style='color:#64748b; font-size:0.8rem; font-family: Fira Code;'>v2.0 â€” Biniyam Ademasu</div>
+      <div style='color:#64748b; font-size:0.8rem; font-family: Fira Code;'>v2.0 &mdash; Biniyam Ademasu</div>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("---")
-    st.markdown("**ðŸ¤– Model Selection**")
+    st.markdown("**:brain: Model Selection**")
     selected_model_name = st.selectbox(
         "Choose classifier",
         ["Random Forest", "Gradient Boosting", "Decision Tree", "K-Nearest Neighbors"],
@@ -307,7 +271,7 @@ with st.sidebar:
     )
 
     st.markdown("---")
-    st.markdown("**ðŸ“‚ Data Source**")
+    st.markdown("**:file_folder: Data Source**")
     data_source = st.radio("Choose data source", ["Demo Dataset", "Upload CSV"])
 
     uploaded_file = None
@@ -322,22 +286,19 @@ with st.sidebar:
     st.markdown("""
     <div style='font-size:0.75rem; color:#64748b; text-align:center;'>
       Built by <strong style='color:#00d4ff'>Biniyam Ademasu Afework</strong><br>
-      B.Sc. Cyber Security â€” Bahir Dar University<br><br>
+      B.Sc. Cyber Security &mdash; Bahir Dar University<br><br>
       <a href='https://github.com/bini576' style='color:#00d4ff; text-decoration:none;'>github.com/bini576</a>
     </div>
     """, unsafe_allow_html=True)
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # LOAD DATA & TRAIN
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-with st.spinner("ðŸ”„ Loading data and training models..."):
+with st.spinner("Loading data and training models..."):
     if uploaded_file is not None:
         try:
             df = pd.read_csv(uploaded_file)
             if "label" not in df.columns:
-                st.error("âŒ CSV must contain a 'label' column (0 = Normal, 1 = Attack)")
+                st.error("CSV must contain a 'label' column (0 = Normal, 1 = Attack)")
                 st.stop()
-            # Encode any string columns
             for col in df.select_dtypes(include="object").columns:
                 df[col] = LabelEncoder().fit_transform(df[col].astype(str))
         except Exception as e:
@@ -350,16 +311,14 @@ with st.spinner("ðŸ”„ Loading data and training models..."):
     best_model = trained_models[selected_model_name]
     best_results = results[selected_model_name]
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-# HEADER
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# HEADER BANNER — all emojis as HTML entities
 st.markdown(f"""
 <div class="header-banner">
   <div style='display:flex; justify-content:space-between; align-items:flex-start;'>
     <div>
-      <div class="header-title">ðŸ›¡ï¸ AI-Based Intrusion Detection System</div>
+      <div class="header-title">&#x1F6E1;&#xFE0F; AI-Based Intrusion Detection System</div>
       <div class="header-subtitle">$ network_monitor --model {selected_model_name.lower().replace(" ","_")} --mode live_analysis</div>
-      <span class="header-badge">â— SYSTEM ACTIVE</span>
+      <span class="header-badge">&#x25CF; SYSTEM ACTIVE</span>
     </div>
     <div style='text-align:right;'>
       <div style='color:#64748b; font-size:0.8rem; font-family: Fira Code;'>Dataset: {len(df):,} records</div>
@@ -370,51 +329,53 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-# TOP METRIC CARDS
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# METRIC CARDS — entities for all icons
 c1, c2, c3, c4 = st.columns(4)
 with c1:
     st.markdown(f"""<div class="metric-card">
       <div class="metric-value">{best_results["accuracy"]}%</div>
-      <div class="metric-label">ðŸŽ¯ Accuracy</div></div>""", unsafe_allow_html=True)
+      <div class="metric-label">&#x1F3AF; Accuracy</div></div>""", unsafe_allow_html=True)
 with c2:
     st.markdown(f"""<div class="metric-card">
       <div class="metric-value">{best_results["precision"]}%</div>
-      <div class="metric-label">ðŸ” Precision</div></div>""", unsafe_allow_html=True)
+      <div class="metric-label">&#x1F50D; Precision</div></div>""", unsafe_allow_html=True)
 with c3:
     st.markdown(f"""<div class="metric-card">
       <div class="metric-value">{best_results["recall"]}%</div>
-      <div class="metric-label">ðŸ“¡ Recall</div></div>""", unsafe_allow_html=True)
+      <div class="metric-label">&#x1F4E1; Recall</div></div>""", unsafe_allow_html=True)
 with c4:
     st.markdown(f"""<div class="metric-card">
       <div class="metric-value">{best_results["f1"]}%</div>
-      <div class="metric-label">âš¡ F1-Score</div></div>""", unsafe_allow_html=True)
+      <div class="metric-label">&#x26A1; F1-Score</div></div>""", unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-# TABS
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-tab1, tab2, tab3, tab4 = st.tabs(["ðŸ” Live Classifier", "ðŸ“Š Model Analytics", "ðŸ“ˆ Dataset Explorer", "ðŸ“š About"])
+# TABS — Streamlit handles these natively, emojis work fine here
+tab1, tab2, tab3, tab4 = st.tabs([
+    "&#x1F50D; Live Classifier",
+    "&#x1F4CA; Model Analytics",
+    "&#x1F4C8; Dataset Explorer",
+    "&#x1F4DA; About"
+])
 
-# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-# TAB 1 â€” LIVE CLASSIFIER
-# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 1 — LIVE CLASSIFIER
 with tab1:
-    st.markdown('<div class="section-title">ðŸ” Real-Time Traffic Classification</div>', unsafe_allow_html=True)
-    st.markdown("Input network connection features below and the model will classify it instantly.")
+    st.markdown('<div class="section-title">&#x1F50D; Real-Time Traffic Classification</div>', unsafe_allow_html=True)
+    st.markdown("Input network connection features and the model will classify it instantly.")
 
-    input_mode = st.radio("Input mode", ["ðŸŽ›ï¸ Manual Feature Input", "ðŸ“‹ Paste Single Record", "ðŸŽ² Generate Random Sample"], horizontal=True)
+    input_mode = st.radio(
+        "Input mode",
+        ["Manual Feature Input", "Paste Single Record", "Generate Random Sample"],
+        horizontal=True
+    )
 
-    if input_mode == "ðŸŽ² Generate Random Sample":
+    if input_mode == "Generate Random Sample":
         sample_type = st.selectbox("Sample type", ["Random Normal Traffic", "Random Attack Traffic", "Surprise Me!"])
-        if st.button("âš¡ Generate & Classify"):
+        if st.button("Generate & Classify"):
             rng = np.random.default_rng()
             is_attack = sample_type == "Random Attack Traffic" or (sample_type == "Surprise Me!" and rng.random() > 0.5)
             temp_df = generate_demo_data(n=2, seed=int(rng.integers(0, 10000)))
             sample = temp_df.drop("label", axis=1).iloc[0:1]
-            actual = temp_df["label"].iloc[0]
 
             scaled = scaler.transform(sample)
             pred = best_model.predict(scaled)[0]
@@ -424,7 +385,7 @@ with tab1:
             with col_a:
                 if pred == 0:
                     st.markdown(f"""<div class="alert-normal">
-                      <div class="alert-title">âœ… NORMAL TRAFFIC</div>
+                      <div class="alert-title">&#x2705; NORMAL TRAFFIC</div>
                       <div style='color:#94a3b8; font-size:0.9rem;'>Connection classified as benign</div>
                       <div style='margin-top:10px;'>
                         <span style='color:#00ff88; font-weight:700; font-size:1.5rem;'>{proba[0]*100:.1f}%</span>
@@ -433,7 +394,7 @@ with tab1:
                     </div>""", unsafe_allow_html=True)
                 else:
                     st.markdown(f"""<div class="alert-attack">
-                      <div class="alert-title">ðŸš¨ ATTACK DETECTED</div>
+                      <div class="alert-title">&#x1F6A8; ATTACK DETECTED</div>
                       <div style='color:#94a3b8; font-size:0.9rem;'>Malicious connection detected!</div>
                       <div style='margin-top:10px;'>
                         <span style='color:#ff3b3b; font-weight:700; font-size:1.5rem;'>{proba[1]*100:.1f}%</span>
@@ -452,8 +413,7 @@ with tab1:
                 fig.update_layout(
                     title="Prediction Confidence",
                     paper_bgcolor="#0d1117", plot_bgcolor="#0d1117",
-                    font_color="#e2e8f0",
-                    height=200,
+                    font_color="#e2e8f0", height=200,
                     margin=dict(t=40, b=0, l=0, r=0),
                     showlegend=False,
                     yaxis=dict(range=[0, 110], gridcolor="#1e2a3a"),
@@ -461,10 +421,10 @@ with tab1:
                 )
                 st.plotly_chart(fig, use_container_width=True)
 
-            with st.expander("ðŸ”Ž Sample Features"):
+            with st.expander("View Sample Features"):
                 st.dataframe(sample.T.rename(columns={0: "Value"}), use_container_width=True)
 
-    elif input_mode == "ðŸŽ›ï¸ Manual Feature Input":
+    elif input_mode == "Manual Feature Input":
         st.markdown("**Key network features (simplified):**")
         col1, col2, col3, col4 = st.columns(4)
         with col1:
@@ -492,11 +452,10 @@ with tab1:
             dst_host_serror_rate = st.slider("Dst Host SErr Rate", 0.0, 1.0, 0.0, 0.01)
             wrong_fragment = st.number_input("Wrong Fragments", 0, 10, 0)
 
-        if st.button("ðŸ›¡ï¸ Classify Traffic"):
+        if st.button("Classify Traffic"):
             proto_map = {p: i for i, p in enumerate(PROTOCOL_TYPES)}
-            svc_map = {s: i for i, s in enumerate(SERVICES)}
-            flag_map = {f: i for i, f in enumerate(FLAGS)}
-
+            svc_map   = {s: i for i, s in enumerate(SERVICES)}
+            flag_map  = {f: i for i, f in enumerate(FLAGS)}
             input_data = np.zeros(41)
             input_data[0]  = duration
             input_data[1]  = proto_map.get(protocol, 0)
@@ -523,54 +482,56 @@ with tab1:
             input_data[37] = dst_host_serror_rate
 
             scaled = scaler.transform(input_data.reshape(1, -1))
-            pred = best_model.predict(scaled)[0]
-            proba = best_model.predict_proba(scaled)[0]
+            pred   = best_model.predict(scaled)[0]
+            proba  = best_model.predict_proba(scaled)[0]
 
             if pred == 0:
                 st.markdown(f"""<div class="alert-normal">
-                  <div class="alert-title">âœ… NORMAL TRAFFIC â€” {proba[0]*100:.1f}% Confidence</div>
+                  <div class="alert-title">&#x2705; NORMAL TRAFFIC &mdash; {proba[0]*100:.1f}% Confidence</div>
                   <div>This connection matches normal network behavior patterns.</div>
                 </div>""", unsafe_allow_html=True)
             else:
                 st.markdown(f"""<div class="alert-attack">
-                  <div class="alert-title">ðŸš¨ ATTACK DETECTED â€” {proba[1]*100:.1f}% Confidence</div>
+                  <div class="alert-title">&#x1F6A8; ATTACK DETECTED &mdash; {proba[1]*100:.1f}% Confidence</div>
                   <div>This connection exhibits malicious patterns. Take immediate action!</div>
                 </div>""", unsafe_allow_html=True)
 
-    else:  # Paste
+    else:
         st.markdown("Paste a comma-separated record (41 numeric features):")
-        pasted = st.text_area("Feature values", placeholder="0,0,1,0,491,0,0,0,0,0,1,0,0,0,0,0,0,0,2,2,0.0,0.0,0.0,0.0,1.0,0.0,0.0,150,25,0.17,0.03,0.17,0.0,0.0,0.0,0.05,0.0,0.0,0.0,0.0,0.0", height=100)
-        if st.button("ðŸ›¡ï¸ Classify Pasted Record"):
+        pasted = st.text_area(
+            "Feature values",
+            placeholder="0,0,1,0,491,0,0,0,0,0,1,0,0,0,0,0,0,0,2,2,0.0,0.0,0.0,0.0,1.0,0.0,0.0,150,25,0.17,0.03,0.17,0.0,0.0,0.0,0.05,0.0,0.0,0.0,0.0,0.0",
+            height=100
+        )
+        if st.button("Classify Pasted Record"):
             try:
                 vals = [float(x.strip()) for x in pasted.split(",")]
                 if len(vals) != 41:
                     st.error(f"Expected 41 features, got {len(vals)}")
                 else:
                     scaled = scaler.transform(np.array(vals).reshape(1, -1))
-                    pred = best_model.predict(scaled)[0]
-                    proba = best_model.predict_proba(scaled)[0]
-                    label = "âœ… NORMAL" if pred == 0 else "ðŸš¨ ATTACK"
-                    color = "#00ff88" if pred == 0 else "#ff3b3b"
+                    pred   = best_model.predict(scaled)[0]
+                    proba  = best_model.predict_proba(scaled)[0]
+                    label  = "NORMAL" if pred == 0 else "ATTACK DETECTED"
+                    color  = "#00ff88" if pred == 0 else "#ff3b3b"
+                    icon   = "&#x2705;" if pred == 0 else "&#x1F6A8;"
                     st.markdown(f"""<div style='text-align:center; padding:30px;'>
-                      <div style='color:{color}; font-size:2.5rem; font-weight:800; font-family:Fira Code;'>{label}</div>
+                      <div style='color:{color}; font-size:2.5rem; font-weight:800; font-family:Fira Code;'>{icon} {label}</div>
                       <div style='color:#64748b; margin-top:8px;'>Confidence: {max(proba)*100:.1f}%</div>
                     </div>""", unsafe_allow_html=True)
             except Exception as e:
                 st.error(f"Parse error: {e}")
 
-# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-# TAB 2 â€” MODEL ANALYTICS
-# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 2 — MODEL ANALYTICS
 with tab2:
-    st.markdown('<div class="section-title">ðŸ“Š Model Performance Comparison</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">&#x1F4CA; Model Performance Comparison</div>', unsafe_allow_html=True)
 
-    # Comparison bar chart
     metrics_df = pd.DataFrame(results).T.reset_index().rename(columns={"index": "Model"})
     fig = go.Figure()
     for metric, color in [("accuracy","#00d4ff"),("precision","#00ff88"),("recall","#a855f7"),("f1","#f59e0b")]:
         fig.add_trace(go.Bar(name=metric.capitalize(), x=metrics_df["Model"], y=metrics_df[metric], marker_color=color))
     fig.update_layout(
-        barmode="group", title="All Models â€” All Metrics (%)",
+        barmode="group", title="All Models — All Metrics (%)",
         paper_bgcolor="#0d1117", plot_bgcolor="#0d1117",
         font_color="#e2e8f0", height=380,
         legend=dict(bgcolor="#0d1117"),
@@ -582,7 +543,7 @@ with tab2:
     col_left, col_right = st.columns(2)
 
     with col_left:
-        st.markdown(f'<div class="section-title">ðŸ”² Confusion Matrix â€” {selected_model_name}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="section-title">&#x1F532; Confusion Matrix &mdash; {selected_model_name}</div>', unsafe_allow_html=True)
         cm = best_results["cm"]
         fig_cm = go.Figure(go.Heatmap(
             z=cm, x=["Predicted Normal", "Predicted Attack"],
@@ -599,23 +560,22 @@ with tab2:
         st.plotly_chart(fig_cm, use_container_width=True)
 
     with col_right:
-        st.markdown('<div class="section-title">ðŸ† Model Ranking</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">&#x1F3C6; Model Ranking</div>', unsafe_allow_html=True)
         ranking = sorted(results.items(), key=lambda x: x[1]["f1"], reverse=True)
+        medals = ["#1 Gold", "#2 Silver", "#3 Bronze", "#4"]
         for rank, (name, r) in enumerate(ranking, 1):
-            emoji = ["ðŸ¥‡","ðŸ¥ˆ","ðŸ¥‰","4ï¸âƒ£"][rank-1]
             highlight = "border: 1px solid #00d4ff;" if name == selected_model_name else ""
             st.markdown(f"""
             <div style='background:#0d1117; border-radius:8px; padding:12px 16px; margin:6px 0; {highlight}'>
-              <span style='font-weight:700; color:#e2e8f0;'>{emoji} {name}</span>
+              <span style='font-weight:700; color:#e2e8f0;'>{medals[rank-1]} &nbsp; {name}</span>
               <span style='float:right; color:#00d4ff; font-family:Fira Code; font-weight:700;'>{r["f1"]}% F1</span>
               <div style='color:#64748b; font-size:0.8rem; margin-top:2px;'>
                 Acc: {r["accuracy"]}% | Prec: {r["precision"]}% | Rec: {r["recall"]}%
               </div>
             </div>""", unsafe_allow_html=True)
 
-    # Feature importance (Random Forest)
     if selected_model_name == "Random Forest":
-        st.markdown('<div class="section-title">ðŸ”‘ Top Feature Importances</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">&#x1F511; Top Feature Importances</div>', unsafe_allow_html=True)
         importance = pd.DataFrame({
             "Feature": FEATURES,
             "Importance": best_model.feature_importances_
@@ -630,11 +590,9 @@ with tab2:
         )
         st.plotly_chart(fig_fi, use_container_width=True)
 
-# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-# TAB 3 â€” DATASET EXPLORER
-# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 3 — DATASET EXPLORER
 with tab3:
-    st.markdown('<div class="section-title">ðŸ“ˆ Dataset Statistics</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">&#x1F4C8; Dataset Statistics</div>', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
@@ -663,13 +621,13 @@ with tab3:
         )
         st.plotly_chart(fig_src, use_container_width=True)
 
-    st.markdown('<div class="section-title">ðŸ“‹ Sample Records</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">&#x1F4CB; Sample Records</div>', unsafe_allow_html=True)
     sample_size = st.slider("Records to display", 5, 50, 10)
     display_df = df.head(sample_size).copy()
-    display_df["label"] = display_df["label"].map({0: "âœ… Normal", 1: "ðŸš¨ Attack"})
+    display_df["label"] = display_df["label"].map({0: "Normal", 1: "Attack"})
     st.dataframe(display_df[["duration","src_bytes","dst_bytes","count","serror_rate","label"]], use_container_width=True)
 
-    st.markdown('<div class="section-title">ðŸ“Š Feature Correlations (Numeric)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">&#x1F4CA; Feature Correlations</div>', unsafe_allow_html=True)
     top_cols = ["duration","src_bytes","dst_bytes","count","serror_rate","rerror_rate","same_srv_rate","dst_host_count","label"]
     corr = df[top_cols].corr()
     fig_corr = px.imshow(corr, color_continuous_scale=[[0,"#ff3b3b"],[0.5,"#0d1117"],[1,"#00d4ff"]],
@@ -677,30 +635,29 @@ with tab3:
     fig_corr.update_layout(paper_bgcolor="#0d1117", font_color="#e2e8f0", height=400)
     st.plotly_chart(fig_corr, use_container_width=True)
 
-# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-# TAB 4 â€” ABOUT
-# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 4 — ABOUT
 with tab4:
     st.markdown("""
     <div style='background:#0d1117; border:1px solid #1e3a5f; border-radius:12px; padding:28px;'>
-      <h2 style='color:#00d4ff; margin-top:0;'>ðŸ›¡ï¸ AI-Based Intrusion Detection System</h2>
+      <h2 style='color:#00d4ff; margin-top:0;'>&#x1F6E1;&#xFE0F; AI-Based Intrusion Detection System</h2>
 
       <p style='color:#94a3b8;'>
         This project implements a machine learning-based Intrusion Detection System (IDS) capable of
-        analyzing network connection records and classifying them as <strong style='color:#00ff88'>normal</strong>
-        or <strong style='color:#ff3b3b'>malicious/attack</strong> in real-time.
+        analyzing network connection records and classifying them as
+        <strong style='color:#00ff88'>normal</strong> or
+        <strong style='color:#ff3b3b'>malicious/attack</strong> in real-time.
       </p>
 
-      <h3 style='color:#e2e8f0;'>ðŸŽ¯ How It Works</h3>
+      <h3 style='color:#e2e8f0;'>How It Works</h3>
       <div style='color:#94a3b8; line-height:1.8;'>
-        <strong style='color:#00d4ff;'>1. Data Collection</strong> â€” Network traffic features are captured (41 KDD Cup features)<br>
-        <strong style='color:#00d4ff;'>2. Preprocessing</strong> â€” Feature scaling and encoding applied<br>
-        <strong style='color:#00d4ff;'>3. Training</strong> â€” ML classifiers trained on labeled traffic data<br>
-        <strong style='color:#00d4ff;'>4. Prediction</strong> â€” New traffic classified as Normal or Attack in real-time<br>
-        <strong style='color:#00d4ff;'>5. Alerting</strong> â€” Results displayed with confidence scores
+        <strong style='color:#00d4ff;'>1. Data Collection</strong> &mdash; Network traffic features are captured (41 KDD Cup features)<br>
+        <strong style='color:#00d4ff;'>2. Preprocessing</strong> &mdash; Feature scaling and encoding applied<br>
+        <strong style='color:#00d4ff;'>3. Training</strong> &mdash; ML classifiers trained on labeled traffic data<br>
+        <strong style='color:#00d4ff;'>4. Prediction</strong> &mdash; New traffic classified as Normal or Attack in real-time<br>
+        <strong style='color:#00d4ff;'>5. Alerting</strong> &mdash; Results displayed with confidence scores
       </div>
 
-      <h3 style='color:#e2e8f0;'>âš”ï¸ Attack Categories Detected</h3>
+      <h3 style='color:#e2e8f0; margin-top:20px;'>Attack Categories Detected</h3>
       <div style='display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; margin-top:10px;'>
         <div style='background:#0a1628; border:1px solid #1e3a5f; border-radius:8px; padding:12px;'>
           <strong style='color:#ff3b3b;'>DoS Attacks</strong>
@@ -720,14 +677,14 @@ with tab4:
         </div>
       </div>
 
-      <h3 style='color:#e2e8f0; margin-top:20px;'>ðŸ‘¨â€ðŸ’» About the Developer</h3>
+      <h3 style='color:#e2e8f0; margin-top:20px;'>About the Developer</h3>
       <p style='color:#94a3b8;'>
-        <strong style='color:#00d4ff;'>Biniyam Ademasu Afework</strong> â€” Cybersecurity Analyst &amp; Security Engineer<br>
+        <strong style='color:#00d4ff;'>Biniyam Ademasu Afework</strong> &mdash; Cybersecurity Analyst &amp; Security Engineer<br>
         B.Sc. Cyber Security, Bahir Dar University, Ethiopia (GPA: 3.43/4.00, 2026)<br>
         Skills: Python, Machine Learning, Network Security, Penetration Testing<br><br>
-        ðŸ”— <a href='https://bini576.github.io' style='color:#00d4ff;'>Portfolio</a> &nbsp;|&nbsp;
-        ðŸ™ <a href='https://github.com/bini576' style='color:#00d4ff;'>GitHub</a> &nbsp;|&nbsp;
-        ðŸ’¼ <a href='https://linkedin.com/in/biniyam-ademasu' style='color:#00d4ff;'>LinkedIn</a>
+        &#x1F517; <a href='https://bini576.github.io' style='color:#00d4ff;'>Portfolio</a> &nbsp;|&nbsp;
+        <a href='https://github.com/bini576' style='color:#00d4ff;'>GitHub</a> &nbsp;|&nbsp;
+        <a href='https://linkedin.com/in/biniyam-ademasu' style='color:#00d4ff;'>LinkedIn</a>
       </p>
     </div>
     """, unsafe_allow_html=True)
