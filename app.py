@@ -263,7 +263,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     st.markdown("---")
-    st.markdown("**:brain: Model Selection**")
+    st.markdown("**🧠 Model Selection**")
     selected_model_name = st.selectbox(
         "Choose classifier",
         ["Random Forest", "Gradient Boosting", "Decision Tree", "K-Nearest Neighbors"],
@@ -271,7 +271,7 @@ with st.sidebar:
     )
 
     st.markdown("---")
-    st.markdown("**:file_folder: Data Source**")
+    st.markdown("**📁 Data Source**")
     data_source = st.radio("Choose data source", ["Demo Dataset", "Upload CSV"])
 
     uploaded_file = None
@@ -352,10 +352,10 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 # TABS — Streamlit handles these natively, emojis work fine here
 tab1, tab2, tab3, tab4 = st.tabs([
-    "&#x1F50D; Live Classifier",
-    "&#x1F4CA; Model Analytics",
-    "&#x1F4C8; Dataset Explorer",
-    "&#x1F4DA; About"
+    "🔍 Live Classifier",
+    "📊 Model Analytics",
+    "📈 Dataset Explorer",
+    "📚 About"
 ])
 
 # TAB 1 — LIVE CLASSIFIER
