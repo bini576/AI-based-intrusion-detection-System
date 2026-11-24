@@ -1,6 +1,6 @@
 <div align="center">
 
-# ðŸ›¡ï¸ AI-Based Intrusion Detection System (AI-IDS)
+# 🛡️ AI-Based Intrusion Detection System (AI-IDS)
 ### Intelligent Network Anomaly & Attack Vector Classification using Machine Learning
 
 [![Python Version](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
@@ -10,12 +10,12 @@
 [![Build Status](https://img.shields.io/badge/Status-Completed%20%2F%20Active-success?style=for-the-badge)](#)
 
 <p align="center">
-  <a href="#-overview">Overview</a> â€¢
-  <a href="#-key-features">Key Features</a> â€¢
-  <a href="#-tech-stack">Tech Stack</a> â€¢
-  <a href="#-dataset-architecture">Dataset</a> â€¢
-  <a href="#-installation--setup">Installation</a> â€¢
-  <a href="#-model-evaluation--metrics">Evaluation</a> â€¢
+  <a href="#-overview">Overview</a> •
+  <a href="#-key-features">Key Features</a> •
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-dataset-architecture">Dataset</a> •
+  <a href="#-installation--setup">Installation</a> •
+  <a href="#-model-evaluation--metrics">Evaluation</a> •
   <a href="#-roadmap">Roadmap</a>
 </p>
 
@@ -23,7 +23,7 @@
 
 ---
 
-## ðŸ“Œ Overview
+## 📌 Overview
 
 Traditional signature-based Network Intrusion Detection Systems (NIDS) struggle to detect zero-day exploits and polymorphic threat payloads. **AI-IDS** is a machine learning-driven network anomaly detection pipeline designed to inspect network telemetry, uncover statistical deviations, and categorize malicious flow behaviors in near real-time.
 
@@ -31,7 +31,7 @@ Developed by **Biniyam Ademasu Afework**, this project applies supervised and en
 
 ---
 
-## âœ¨ Key Features
+## ✨ Key Features
 
 - **Multi-Class Threat Classification:** Accurately differentiates normal traffic patterns from multi-vector cyber attacks:
   - **DoS / DDoS:** SYN floods, Smurf, Neptune, Pod
@@ -47,7 +47,7 @@ Developed by **Biniyam Ademasu Afework**, this project applies supervised and en
 
 ---
 
-## ðŸ› ï¸ Tech Stack & Dependencies
+## 🛠️ Tech Stack & Dependencies
 
 | Layer | Tools & Libraries |
 |:---|:---|
@@ -60,7 +60,7 @@ Developed by **Biniyam Ademasu Afework**, this project applies supervised and en
 
 ---
 
-## ðŸ“Š Dataset Architecture & Preprocessing
+## 📊 Dataset Architecture & Preprocessing
 
 The model is trained and benchmarked against standardized intrusion detection datasets (e.g., **NSL-KDD / CICIDS2017**):
 
@@ -75,7 +75,7 @@ The model is trained and benchmarked against standardized intrusion detection da
 
 ---
 
-## ðŸš€ Installation & Setup
+## 🚀 Installation & Setup
 
 ### Prerequisites
 - Python 3.9 or higher
@@ -118,7 +118,7 @@ Navigate to `notebooks/` and open `AI_Intrusion_Detection.ipynb` to run cells se
 
 ---
 
-## ðŸ“ˆ Model Evaluation & Metrics
+## 📈 Model Evaluation & Metrics
 
 The system was evaluated using standard classification metrics: Precision, Recall, F1-Score, and ROC-AUC.
 
@@ -126,7 +126,7 @@ The system was evaluated using standard classification metrics: Precision, Recal
 
 | Classifier Model | Accuracy (%) | Precision | Recall | F1-Score | Status |
 |:---|:---:|:---:|:---:|:---:|:---:|
-| **Random Forest Classifier** | **99.2%** | **0.99** | **0.99** | **0.99** | ðŸŒŸ *Best Performer* |
+| **Random Forest Classifier** | **99.2%** | **0.99** | **0.99** | **0.99** | 🌟 *Best Performer* |
 | **Decision Tree (CART)** | 98.4% | 0.98 | 0.98 | 0.98 | Validated |
 | **Support Vector Machine (RBF)** | 96.7% | 0.97 | 0.96 | 0.96 | Validated |
 | **Logistic Regression** | 92.1% | 0.91 | 0.93 | 0.92 | Baseline |
@@ -139,7 +139,7 @@ The system was evaluated using standard classification metrics: Precision, Recal
 
 ---
 
-## ðŸ“¸ Screenshots & Visualizations
+## 📸 Screenshots & Visualizations
 
 <div align="center">
 
@@ -160,7 +160,7 @@ Actual Malicious     [    84 ]           [ 7,322 ]
 
 ---
 
-## ðŸ”® Future Improvements & Roadmap
+## 🔮 Future Improvements & Roadmap
 
 - [ ] **Real-Time Packet Ingestion:** Integrate `Scapy` / `PyShark` live packet sniffing engine for immediate flow classification.
 - [ ] **Deep Learning Models:** Benchmark 1D-CNN and LSTM networks to capture temporal sequence dependencies in network flows.
@@ -169,14 +169,14 @@ Actual Malicious     [    84 ]           [ 7,322 ]
 
 ---
 
-## âš–ï¸ Ethics & Responsible Disclosure
+## ⚖️ Ethics & Responsible Disclosure
 
 > **LEGAL NOTICE & DISCLAIMER:**  
 > This project is developed strictly for **educational, defensive, and academic research purposes** under the Cyber Security curriculum at Bahir Dar University. The models and methodologies are intended to assist network administrators, security analysts, and researchers in securing authorized enterprise infrastructure. Any unauthorized deployment against networks without explicit written consent is illegal and strictly prohibited.
 
 ---
 
-## ðŸ“„ License & Author
+## 📄 License & Author
 
 Distributed under the **MIT License**. See `LICENSE` for more information.
 
